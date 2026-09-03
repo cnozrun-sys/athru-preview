@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Athru</title>
+    <!--
+      GitHub Pages serves this file for any path it cannot find on disk.
+      Because the site is a single-page app, every route other than "/"
+      lands here first. This script rewrites the path into a query string
+      and bounces to index.html, where a matching snippet restores the
+      original URL before React Router mounts. Without this pair, a direct
+      visit to /careers returns a hard 404.
+
+      pathSegmentsToKeep is 0 for a site served from the domain root, which
+      is how production is deployed. A preview served from a subpath (e.g.
+      user.github.io/athru-preview/) needs it set to 1 so the redirect keeps
+      the repository segment. scripts/deploy-preview.sh rewrites this line
+      in the built copy — leave the formatting alone or that sed stops
+      matching.
+    -->
+    <script>
+      var pathSegmentsToKeep = 1
+      ;(function () {
+        var l = window.location
+        l.replace(
+          l.protocol +
+            '//' +
+            l.hostname +
+            (l.port ? ':' + l.port : '') +
+            l.pathname
+              .split('/')
+              .slice(0, 1 + pathSegmentsToKeep)
+              .join('/') +
+            '/?/' +
+            l.pathname
+              .slice(1)
+              .split('/')
+              .slice(pathSegmentsToKeep)
+              .join('/')
+              .replace(/&/g, '~and~') +
+            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+            l.hash
+        )
+      })()
+    </script>
+  </head>
+  <body></body>
+</html>
